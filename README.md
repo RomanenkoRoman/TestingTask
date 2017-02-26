@@ -18,7 +18,7 @@
 9. Then open in your browser 'localhost:9000'.
 
 ### Data base settings
-  default.driver = org.postgresql.Driver
+  *default.driver = org.postgresql.Driver
   default.url = "jdbc:postgresql://localhost:5432/play"
   default.username = "postgres"
   default.password = "pass"
