@@ -1,0 +1,80 @@
+@import models.entity.Note
+
+@(list: java.util.List[Note])
+
+
+@main("Welcome") {
+    <form>
+
+        <table class="table table-view" id="table">
+
+
+        @if(list.size() > 0) {
+            <tr>
+                <td><h4>Char</h4></td>
+                <td><h4>Date</h4></td>
+                <td><h4>Integer</h4></td>
+                <td><h4>Varchar</h4></td>
+                <td></td>
+            </tr>
+            @for(field <- list) {
+                <tr>
+                    <td>@field.getaChar</td>
+                    <td>@field.getDate</td>
+                    <td>@field.getInteger</td>
+                    <td>@field.getVarchar</td>
+                    <td>
+                        <div class="check">
+                            <input id="check" type="checkbox" name="@field.getId" >
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        } else {
+            <center>
+                <h1>The data base is empty</h1>
+            </center>
+        }
+        </table>
+        <center>
+
+            <input class="btn btn-primary" type="button" onclick='location.href="http://localhost:9000/"' value="Refresh">
+
+            <input id="edit_button" onclick="myFunction()" class="btn btn-warning" type="submit" value="Edit">
+
+            <input formaction="@routes.NoteController.delete()" formmethod="post" class="btn btn-danger" type="submit" value="Delete">
+
+        </center>
+    </form>
+
+    <script>
+            function myFunction(){
+                $(document).ready(function(){
+                    var program = [];
+                    function scanCheckboxes() {
+                        program = [];
+
+                        $('input:checkbox:checked').each(function () {
+                            program.push($(this).val());
+                        });
+                    }
+
+                    $('input:checkbox').each(function () {
+                        $(this).mousedown(scanCheckboxes());
+                    });
+
+                    if (program.length == 1||program.length==0)
+                    {
+                        $("#edit_button").attr("formmethod", "get");
+                        $("#edit_button").attr("formaction", "/edit");
+                    }else {
+                        alert("please select just one row to be edited");
+                    }
+
+                });
+            }
+
+    </script>
+}
+

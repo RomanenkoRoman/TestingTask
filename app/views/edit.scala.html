@@ -1,0 +1,89 @@
+@(note: models.entity.Note)
+
+
+
+@main("Edit/Add") {
+
+    <form>
+        @if(note.eq(null)){
+            <table class="table table-view">
+                <tr>
+                    <td>
+                        <h4>Char</h4>
+                    </td>
+                    <td>
+                        <h4>Date</h4>
+                    </td>
+                    <td>
+                        <h4>Integer</h4>
+                    </td>
+                    <td>
+                        <h4>Varchar</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input name="aChar" type="text" pattern="\S" required>
+                    </td>
+                    <td>
+                        <input name="date" type="date" required>
+                    </td>
+                    <td>
+                        <input name="integer" type="number" required  max="2147483647" min="-2147483648" >
+                    </td>
+                    <td>
+                        <input name="varchar" type="text" required maxlength="50">
+                    </td>
+                </tr>
+            </table>
+        }else{
+            <table class="table table-view">
+                <tr>
+                    <td>
+                        <h4>Char</h4>
+                    </td>
+                    <td>
+                        <h4>Date</h4>
+                    </td>
+                    <td>
+                        <h4>Integer</h4>
+                    </td>
+                    <td>
+                        <h4>Varchar</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input name="aChar" value="@note.getaChar()" type="text" pattern="\S" required>
+                    </td>
+                    <td>
+                        <input name="date" value="@note.getDate" type="date" required>
+                    </td>
+                    <td>
+                        <input name="integer" value="@note.getInteger" max="2147483647" min="-2147483648" type="number" required>
+                    </td>
+                    <td>
+                        <input name="varchar" value="@note.getVarchar" type="text" required maxlength="50">
+                        <input hidden name="id" value="@note.getId">
+                    </td>
+                </tr>
+            </table>
+        }
+
+        <center>
+                <input formmethod="post" formaction="@routes.NoteController.add()" id="add" type="submit" value="Add" class="btn btn-success">
+                <input formmethod="post" formaction="@routes.NoteController.save()" id="save" type="submit" value="Save" class="btn btn-success">
+            <input class="btn btn-primary" type="button" onclick='location.href="http://localhost:9000/"' value="Cancel">
+        </center>
+    </form>
+
+    <script>
+            if (@note.eq(null)){
+                $("#save").hide();
+            }
+            else {
+                $("#add").hide();
+            }
+    </script>
+
+}

@@ -1,0 +1,13 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+
+GET         /                    controllers.NoteController.index()
+POST        /                    controllers.NoteController.delete()
+GET         /edit                controllers.NoteController.edit()
+POST        /add                 controllers.NoteController.add()
+POST        /save                controllers.NoteController.save()
+
+
+
